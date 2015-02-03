@@ -1,0 +1,27 @@
+#include <SPI.h>
+#include <TCL.h>
+
+int ledPin = 13;
+
+void setup() {
+  TCL.begin();
+}
+
+void loop() {
+    TCL.sendEmptyFrame();
+    TCL.sendColor(0xff,0x00,0x00);
+    TCL.sendColor(0xff,0x60,0x00);
+    TCL.sendColor(0xff,0xb0,0x00);
+    TCL.sendColor(0x00,0x80,0x00);
+    TCL.sendColor(0x00,0x00,0xff);
+    TCL.sendEmptyFrame();
+    delay(1000);
+    TCL.sendEmptyFrame();
+    TCL.sendColor(0x00,0xff,0x00);
+    TCL.sendColor(0xff,0x00,0x60);
+    TCL.sendColor(0xff,0xff,0xff);
+    TCL.sendColor(0x00,0x00,0x00);
+    TCL.sendColor(0xf0,0x00,0x00);
+    TCL.sendEmptyFrame();
+    delay(1000);
+}
