@@ -11,20 +11,9 @@ void setup() {
 
 void loop() {
     TCL.sendEmptyFrame();
-    stage+=analogRead(TCL_POT1)/25;
-    if (stage > 765) {
-      stage = 0;
-    }
     for (int i=0; i<150; i++) {
-      int num = (stage+(i*(analogRead(TCL_POT2)/25))) % 765;
-      if (num <= 255) {
-        TCL.sendColor(255-num,num,0);
-      } else if (num <= 510) {
-        TCL.sendColor(0,510-num,num-255);
-      } else {
-        TCL.sendColor(num-510,0,765-num);
-      }
+       TCL.sendColor(analogRead(TCL_POT1)/15,analogRead(TCL_POT2)/8,analogRead(TCL_POT3)/8);
     }
     TCL.sendEmptyFrame();
-    delay(30);
+    delay(2);
 }
