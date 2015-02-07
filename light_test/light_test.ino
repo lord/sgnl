@@ -4,8 +4,6 @@
 int ledPin = 13;
 int stage = 0;
 int buffer[3][8][11] = {0};
-int x = 0;
-int y = 0;
 
 void sendColor(int r, int g, int b) {
   if (r > 256) {
@@ -59,20 +57,25 @@ void setup() {
 }
 
 void loop() {
-  x++;
-  if (x >= 8) {
-    x = 0;
-    y++;
-  }
-  if (y >= 11) {
-    y = 0;
+  stage+=analogRead(TCL_POT1)/25;
+  if (stage > 1530) {
+    stage = 0;
   }
   for (int i1 = 0; i1 < 8; i1++) {
     for (int i2 = 0; i2 < 11; i2++) {
-      if (i1 == x && i2 == y) {
-        setColor(i1,i2,0xff,0xff,0xff);
+      int num = (stage+((i1+i2)*(analogRead(TCL_POT2)/25))) % 1530;
+      if (num <= 255) {
+        setColor(i1, i2, 255,num-0,0);
+      } else if (num <= 510) {
+        setColor(i1, i2, 510-num,255,0);
+      } else if (num <= 765) {
+        setColor(i1, i2, 0, 255, num-510);
+      } else if (num <= 1020) {
+        setColor(i1, i2, 0, 1020-num, 255);
+      } else if (num <= 1275) {
+        setColor(i1, i2, num-1020, 0, 255);
       } else {
-        setColor(i1,i2,0,0,0);
+        setColor(i1, i2, 255, 0, 1530-num);
       }
     }
   }
