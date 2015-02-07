@@ -24,7 +24,7 @@ void sendColor(int r, int g, int b) {
   if (b < 0) {
     b = 0;
   }
-  TCL.sendColor(r/4, g/2, b/2);
+  TCL.sendColor(r/3, g/2, b/2);
 }
 
 void setColor(int x, int y, int r, int g, int b) {
