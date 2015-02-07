@@ -57,13 +57,13 @@ void setup() {
 }
 
 void loop() {
-  stage+=analogRead(TCL_POT1)/25;
+  stage+=analogRead(TCL_POT1)/8;
   if (stage > 1530) {
     stage = 0;
   }
   for (int i1 = 0; i1 < 8; i1++) {
     for (int i2 = 0; i2 < 11; i2++) {
-      int num = (stage+((i1+i2)*(analogRead(TCL_POT2)/25))) % 1530;
+      int num = (stage+((i1+i2)*(analogRead(TCL_POT2)/8))) % 1530;
       if (num <= 255) {
         setColor(i1, i2, 255,num-0,0);
       } else if (num <= 510) {
